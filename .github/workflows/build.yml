@@ -75,3 +75,16 @@ jobs:
     - name: Build dedicated linux-amd64
       run: |
         scripts/build-ubuntu-amd64.sh -d
+
+  upload-artifacts:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Compress build directory
+      run: |
+        tar -cvf build.tar ./build
+    - uses: actions/upload-artifact@v3
+      with:
+        name: build.tar
+        path: .
