@@ -38,12 +38,11 @@ jobs:
     - name: Compress build directory
       run: |
         mkdir artifacts
-        tar -cvf build.tar ./build
-        mv ./build.tar ./artifacts
+        tar -cvf ../build.tar .
     - uses: actions/upload-artifact@v3
       with:
         name: build.tar
-        path: ./artifacts
+        path: ../build.tar
 
 #  build-windows-i386:
 #    runs-on: windows-2019
