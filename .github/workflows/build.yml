@@ -37,11 +37,13 @@ jobs:
         scripts/build-android-armv7a.sh
     - name: Compress build directory
       run: |
+        mkdir artifacts
         tar -cvf build.tar ./build
+        mv ./build.tar ./artifacts
     - uses: actions/upload-artifact@v3
       with:
         name: build.tar
-        path: .
+        path: ./artifacts
 
   build-windows-i386:
     runs-on: windows-2019
