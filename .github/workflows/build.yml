@@ -35,6 +35,13 @@ jobs:
     - name: Build android-armv7a
       run: |
         scripts/build-android-armv7a.sh
+    - name: Compress build directory
+      run: |
+        tar -cvf build.tar ./build
+    - uses: actions/upload-artifact@v3
+      with:
+        name: build.tar
+        path: .
 
   build-windows-i386:
     runs-on: windows-2019
@@ -76,15 +83,3 @@ jobs:
       run: |
         scripts/build-ubuntu-amd64.sh -d
 
-  upload-artifacts:
-    runs-on: ubuntu-18.04
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Compress build directory
-      run: |
-        tar -cvf build.tar ./build
-    - uses: actions/upload-artifact@v3
-      with:
-        name: build.tar
-        path: .
